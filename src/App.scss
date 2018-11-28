@@ -1,0 +1,61 @@
+$text-color: #eee;
+
+.app {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  user-select: none;
+  background: url(./bg.jpg);
+  background-size: 100%;
+  color: $text-color;
+  .cover {
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    font-size: 0.7rem;
+    max-width: 8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-shadow: 0 0 1px #999,
+    1px 1px 1px #888,
+    2px 2px 1px #777,
+    3px 3px 1px #666,
+    4px 4px 1px #555,
+    5px 5px 1px #444;
+    transition: all 0.3s ease-out;
+    opacity: 1;
+    &.hide {
+      opacity: 0;
+      top: 6rem;
+    }
+  }
+  .random-board {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+    transition: all 0.3s ease-out;
+    opacity: 1;
+    &.hide{
+      opacity: 0;
+      transform: translateY(-2rem);
+    }
+    .number {
+      width: 2.2rem;
+      height: 1.1rem;
+      margin: 0.35rem 0.8rem;
+      line-height: 1.1rem;
+      text-align: center;
+      font-size: 0.5rem;
+      border: $text-color solid 0.03rem;
+      border-radius: 0.2rem;
+      font-family: TrebuchetMS,Rotobo,"Microsoft YaHei",sans-serif;
+      letter-spacing: 5px;
+    }
+  }
+}
