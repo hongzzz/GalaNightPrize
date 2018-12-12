@@ -10,7 +10,6 @@ class App extends Component {
     };
 
     componentDidMount() {
-        console.log('press enter');
         document.addEventListener('keyup', this.handleKeyup);
     }
 
@@ -29,7 +28,6 @@ class App extends Component {
             this.setState({
                 status: 1
             });
-        } else {
         }
     }
 
@@ -39,7 +37,7 @@ class App extends Component {
         return (
             <div className="app">
                 <Cover show={status === 0}/>
-                <RandomBoard show={status !== 0}/>
+                <RandomBoard show={status !== 0} increaseStatus={this.increaseStatus}/>
             </div>
         );
     }

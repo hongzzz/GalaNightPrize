@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import Number from './Number';
-import {addRandomNum} from './utils';
+import {addRandomNum, getQuery} from './utils';
 
-const maxValue = 3000; // 号码范围
-const randomNum = 4; // 每次抽取个数
+const maxValue = 1800; // 号码范围
+let randomNum = parseInt(getQuery('number')) || 3; // 每次抽取个数
 
 class RandomBoard extends Component {
     timer = null;
+
     state = {
         nums: [],
         fakeNums: Array(randomNum).fill(0),
@@ -21,37 +22,60 @@ class RandomBoard extends Component {
         document.removeEventListener('keyup', this.handleKeyup);
     }
 
+    // 随机生成数，产生动态效果
+    startLoading = () => {
+        const {nums} = this.state;
+
+        this.setState({
+            loading: true,
+            fakeNums: addRandomNum(randomNum, maxValue, nums)
+        });
+
+        this.timer = setInterval(() => {
+            this.setState({
+                fakeNums: addRandomNum(randomNum, maxValue, nums)
+            });
+        }, 80);
+    }
+
+    // 生成中奖名单
+    stopLoading = () => {
+        const {nums} = this.state;
+
+        let tempNums = [...nums, ...addRandomNum(randomNum, maxValue, nums)];
+        this.setState({
+            nums: tempNums,
+            loading: false
+        });
+
+        console.log(tempNums);
+        clearInterval(this.timer);
+    }
+
     handleKeyup = (e) => {
         if (e.keyCode !== 13 && e.keyCode !== 32) return;
-        const {nums, loading} = this.state;
+
+        const {loading} = this.state;
 
         if (loading) {
-            let tempNums = [ ...nums, ...addRandomNum(randomNum, maxValue, nums) ];
-            console.log(tempNums);
-            this.setState({
-                nums: tempNums,
-                loading: false
-            });
-            clearInterval(this.timer);
+            this.stopLoading();
         } else {
-            this.setState({
-                loading: true
-            });
-            this.timer = setInterval(() => {
-                this.setState({
-                    fakeNums: addRandomNum(randomNum, maxValue, nums)
-                });
-            }, 80);
+            this.startLoading();
         }
     }
 
-    render() {
+    // 计算显示的数组
+    get showNums() {
         const {nums, fakeNums, loading} = this.state;
-        let showNums = loading ? fakeNums : nums.slice(-randomNum);
+        return loading ? fakeNums : nums.slice(-randomNum);
+    }
+
+    render() {
+        const {loading} = this.state;
         return (
             <div className={`random-board ${this.props.show ? 'show' : 'hide'}`}>
                 {
-                    showNums.map((item, index) =>
+                    this.showNums.map((item, index) =>
                         <Number loading={loading} maxValue={maxValue} key={index} value={item}/>)
                 }
             </div>

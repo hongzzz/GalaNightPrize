@@ -1,4 +1,4 @@
-$text-color: #eee;
+$text-color: red;
 
 .app {
   position: relative;
@@ -6,25 +6,20 @@ $text-color: #eee;
   width: 100vw;
   overflow: hidden;
   user-select: none;
-  background: url(./bg.jpg);
-  background-size: 100%;
+  background: url(./bg.jpg) no-repeat center;
+  background-size: cover;
   color: $text-color;
+  font-weight: 600;
   .cover {
     position: absolute;
     left: 50%;
-    top: 45%;
+    top: 53%;
     transform: translate(-50%, -50%);
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     max-width: 8rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    text-shadow: 0 0 1px #999,
-    1px 1px 1px #888,
-    2px 2px 1px #777,
-    3px 3px 1px #666,
-    4px 4px 1px #555,
-    5px 5px 1px #444;
     transition: all 0.3s ease-out;
     opacity: 1;
     &.hide {
@@ -33,11 +28,12 @@ $text-color: #eee;
     }
   }
   .random-board {
+    position: relative;
     display: flex;
     align-content: center;
     justify-content: center;
     flex-wrap: wrap;
-    height: 100%;
+    top: 45%;
     width: 100%;
     transition: all 0.3s ease-out;
     opacity: 1;
@@ -46,13 +42,13 @@ $text-color: #eee;
       transform: translateY(-2rem);
     }
     .number {
-      width: 2.2rem;
+      width: 2.1rem;
       height: 1.1rem;
-      margin: 0.35rem 0.8rem;
+      margin: 0 0.2rem;
       line-height: 1.1rem;
       text-align: center;
-      font-size: 0.5rem;
-      border: $text-color solid 0.03rem;
+      font-size: 0.55rem;
+      border: $text-color solid 0.05rem;
       border-radius: 0.2rem;
       font-family: TrebuchetMS,Rotobo,"Microsoft YaHei",sans-serif;
       letter-spacing: 5px;
