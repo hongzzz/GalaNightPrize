@@ -1,5 +1,5 @@
-## Prize
+# PRIZE
 
-简易抽奖
+TSINGHUA UNIVERSITY GALA NIGHT PRIZE
 
-效果见[hongzzz.top/prize](http://hongzzz.top/prize)
+[项目地址](http://hongzzz.top/prize)
